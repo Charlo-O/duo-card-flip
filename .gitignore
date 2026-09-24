@@ -1,0 +1,21 @@
+node_modules/
+dist/
+output/
+.playwright-cli/
+
+# Reference and generated media
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.webm
+*.flv
+*.wmv
+*.m4v
+*.mpeg
+*.mpg
+
+# Local tooling
+*.log
+.DS_Store
+Thumbs.db

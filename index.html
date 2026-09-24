@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Business Card</title>
+  <style>
+    :root {
+      --ink: #0a0a0a;
+      --muted: #5e5e5e;
+      --paper: #ffffff;
+      --track: #ebebeb;
+      --track-line: #aaaaaa;
+      --fill-line: #373737;
+      --sans: "Geist Variable", "Geist", system-ui, sans-serif;
+      --mono: "Geist Mono Variable", "Geist Mono", ui-monospace, monospace;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      display: grid;
+      place-items: center;
+      min-height: 100dvh;
+      overflow: hidden;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* All offsets are CSS px measured from the reference (card = 256×358). */
+    .demo { position: relative; width: 256px; height: 482px; }
+    #card { position: absolute; inset: 0 0 auto 0; height: 358px; }
+    .stage {
+      position: absolute;
+      left: -232px;
+      top: -81px;
+      width: 720px;
+      height: 520px;
+      pointer-events: none;
+    }
+    #hit {
+      position: absolute;
+      left: -128px;
+      top: 0;
+      width: 512px;
+      height: 358px;
+      cursor: grab;
+      touch-action: none;
+      border-radius: 12px;
+      outline: none;
+    }
+    #hit.dragging { cursor: grabbing; }
+    #hit:focus-visible { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink); }
+
+    .hint {
+      position: absolute;
+      left: 0;
+      top: 406px;
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--muted);
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .slider {
+      position: absolute;
+      left: 0;
+      top: 438px;
+      width: 256px;
+      height: 16px;
+      --fill: 3.125%;
+    }
+    .slider .track,
+    .slider .fill {
+      position: absolute;
+      left: 0;
+      top: 4px;
+      height: 8px;
+      border-radius: 4px;
+      pointer-events: none;
+    }
+    .slider .track {
+      width: 100%;
+      background: var(--track);
+      border: 1px solid var(--track-line);
+    }
+    .slider .fill {
+      width: var(--fill);
+      background: var(--ink);
+      border: 1px solid var(--fill-line);
+    }
+    .slider input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 16px;
+      margin: 0;
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    .slider input:focus { outline: none; }
+    .slider input::-webkit-slider-runnable-track { height: 16px; background: transparent; border: 0; }
+    .slider input::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px;
+      height: 16px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+    .slider input::-moz-range-track { height: 16px; background: transparent; border: 0; }
+    .slider input::-moz-range-progress { background: transparent; }
+    .slider input::-moz-range-thumb {
+      width: 16px;
+      height: 16px;
+      border: 0;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+    .slider input:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink); }
+    .slider input:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink); }
+
+    .readout {
+      position: absolute;
+      left: 0;
+      top: 466px;
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 16px;
+      color: var(--muted);
+      white-space: pre;
+      font-variant-numeric: tabular-nums;
+      user-select: none;
+    }
+    /* Geist Mono has no Greek; keep θ on the monospace grid. */
+    .readout .theta {
+      display: inline-block;
+      width: 1ch;
+      text-align: center;
+      font-family: "SF Mono", Menlo, "Segoe UI", Arial, sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <main class="demo">
+    <div id="card">
+      <div id="hit" role="button" tabindex="0" aria-label="Open card"></div>
+    </div>
+    <p class="hint">Drag the page or the slider.</p>
+    <div class="slider" id="slider-wrap">
+      <div class="track"></div>
+      <div class="fill"></div>
+      <input id="slider" type="range" min="0" max="1000" value="0" step="1" aria-label="Open progress" />
+    </div>
+    <p class="readout" aria-live="off">p <span id="p-value">0.00</span> / <span class="theta">θ</span> <span id="theta-value">0</span>°</p>
+  </main>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
