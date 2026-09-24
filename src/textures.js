@@ -26,8 +26,8 @@ const TYPE = {
   linkValue: { font: `400 12px ${MONO}`, color: INK },
 };
 
-// Pixel "CD" mark: 8×4 cells of 5px at (20, 20).
-const LOGO = [".##.###.", "#...#..#", "#...#..#", ".##.###."];
+// Pixel "BI" mark: 8×5 cells of 5px at (20, 20).
+const LOGO = ["###.###.", "#.#..#..", "###..#..", "#.#..#..", "###.###."];
 
 function makeCtx() {
   const c = document.createElement("canvas");
@@ -94,7 +94,7 @@ function text(ctx, style, str, x, baseline, align = "left") {
 }
 
 function drawIdentity(ctx) {
-  text(ctx, TYPE.name, "Chánh Đại", PAD, 311);
+  text(ctx, TYPE.name, "界面之外", PAD, 311);
   text(ctx, TYPE.role, "Design Engineer", PAD, 333);
 }
 
@@ -103,7 +103,7 @@ export function makeCoverTexture() {
   const ctx = makeCtx();
   drawShell(ctx, "left", false);
   drawLogo(ctx);
-  text(ctx, TYPE.handle, "@ncdai", CARD_W - PAD, 32, "right");
+  text(ctx, TYPE.handle, "@Charlo-O", CARD_W - PAD, 32, "right");
   drawIdentity(ctx);
   return ctx.canvas;
 }
@@ -130,12 +130,12 @@ export function makeInsideRightTexture() {
   const ctx = makeCtx();
   drawShell(ctx, "left", true);
   drawLogo(ctx);
-  text(ctx, TYPE.handle, "@ncdai", CARD_W - PAD, 32, "right");
+  text(ctx, TYPE.handle, "@Charlo-O", CARD_W - PAD, 32, "right");
   const rows = [
-    ["Web", "chanhdai.com"],
-    ["GitHub", "ncdai"],
-    ["X", "@iamncdai"],
-    ["LinkedIn", "ncdai"],
+    ["Web", "www.charlo.cn"],
+    ["GitHub", "Charlo-O"],
+    ["XHS", "@界面之外"],
+    ["LinkedIn", "Charlo-O"],
   ];
   rows.forEach(([label, value], i) => {
     const y = 136 + i * 22;
