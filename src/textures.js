@@ -26,8 +26,9 @@ const TYPE = {
   linkValue: { font: `400 12px ${MONO}`, color: INK },
 };
 
-// Pixel "BI" mark: 8×5 cells of 5px at (20, 20).
+// Pixel "BI" mark: 8×5 cells at (20, 20), flattened to match the old "CD".
 const LOGO = ["###.###.", "#.#..#..", "###..#..", "#.#..#..", "###.###."];
+const LOGO_CELL_H = 4;
 
 function makeCtx() {
   const c = document.createElement("canvas");
@@ -80,7 +81,7 @@ function drawLogo(ctx) {
   ctx.fillStyle = INK;
   LOGO.forEach((row, j) => {
     [...row].forEach((cell, i) => {
-      if (cell === "#") ctx.fillRect(PAD + i * 5, PAD + j * 5, 5, 5);
+      if (cell === "#") ctx.fillRect(PAD + i * 5, PAD + j * LOGO_CELL_H, 5, LOGO_CELL_H);
     });
   });
 }
@@ -94,7 +95,7 @@ function text(ctx, style, str, x, baseline, align = "left") {
 }
 
 function drawIdentity(ctx) {
-  text(ctx, TYPE.name, "界面之外", PAD, 311);
+  text(ctx, TYPE.name, "Beyond the Interface", PAD, 311);
   text(ctx, TYPE.role, "Design Engineer", PAD, 333);
 }
 
@@ -147,8 +148,8 @@ export function makeInsideRightTexture() {
 }
 
 export async function loadFonts() {
-  const sample = "Chánh Đại Design Engineer Creating with code. Small details matter.";
-  const mono = "@ncdai he/him Web GitHub X LinkedIn chanhdai.com @iamncdai";
+  const sample = "Beyond the Interface Design Engineer Creating with code. Small details matter.";
+  const mono = "@Charlo-O he/him Web GitHub XHS LinkedIn www.charlo.cn @界面之外";
   await Promise.race([
     Promise.all([
       document.fonts.load(`400 14px ${SANS}`, sample),
